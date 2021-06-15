@@ -1,0 +1,67 @@
+{% extends 'food/base.html' %}
+<!-- Calling static file in base.html, thus removing from here
+{% load static %} -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 
+	Lets use th passed context over index.html file
+	We will loop through passed item and display it over the website
+	We can't use for loop directly in here. We need to use for loop
+	using Django Template Language
+
+	We will alo use HTML, to format it in a better way
+	-->
+
+	{% block body %}
+
+	{% for item in item_list %}
+		<div class="row">
+			<div class="col-md-3 offset-md-2">
+				<img class="card" height="150px" src="{{ item.item_image }}">
+			</div>
+			<div class="col-md-4">
+				<h3>{{ item.item_name }}</h3>
+				<h5>{{ item.item_desc }}</h5>
+				<h6>$ {{ item.item_price }}</h6>
+			</div>
+			<div class="col-md-2">
+				<a href="{% url 'food:detail' item.id %}" class="btn btn-success">Details</a>
+				<!-- <a href="{% url 'food:update_item' item.id %}" class="btn btn-success">Update</a> -->
+			</div>
+		</div>
+
+	{% endfor %}
+
+	{% endblock %}
+
+
+
+
+
+
+	<!-- Old Code -->
+<!-- 	
+
+	
+		<ul>
+			<li> -->
+				<!-- This is based on hard coded urls. In next line of code, we will remove hardcoded
+				urls to dynamic url using path name -->
+				<!-- <a href="/food/{{ item.id }}">{{ item.id }} -- {{ item.item_name }}</a> -->
+
+<!-- 				<a href="{% url 'food:detail' item.id %}">{{ item.id }} -- {{ item.item_name }}</a>
+
+			</li>
+		</ul>
+	
+
+	-->
+
+</body>
+</html>
